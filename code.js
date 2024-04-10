@@ -1,4 +1,4 @@
-function asyncCounter(array,key) {
+function asyncCounter(array,key) { //used an accumulator code from https://transcoding.org/javascript/sum-array/ as a base and then moified it
     let count = array.reduce((count, currentElement) => {
         if (currentElement == key) {
             count++;
