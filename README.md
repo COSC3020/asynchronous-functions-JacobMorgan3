@@ -21,3 +21,6 @@ this.
 
 What is the time complexity of your implementation (worst-case $\Theta$)? Add
 your answer, including your reasoning, to this markdown file.
+
+### Analysis
+The worse case analysis for this function would be $\Theta(n)$. If no processes where done at the same time then if would have to go through each element of the array, one at a time, so n.  
