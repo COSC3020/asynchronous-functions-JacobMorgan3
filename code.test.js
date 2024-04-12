@@ -1,7 +1,7 @@
 const code = require("./code.js");
 const assert = require("assert");
 
-fucntion outputEqual (a,b) { //function that returns true if a and b are equal
+function outputEqual (a,b) { //function that returns true if a and b are equal
   if (a == b)
     return true;
   else
