@@ -1,14 +1,41 @@
-function asyncCounter(array,key) { //used an accumulator code (to sum the numbers in an array) from https://transcoding.org/javascript/sum-array/ as a base and then modified it
-    let count = array.reduce((count, currentElement) => {
-        if (currentElement == key) {
-            count++;
-            return count;   
-        } else 
-            return count;
-    }, 0);
-    
-    return count;
+const { StaticPool } = require("node-worker-threads-pool"); //nmPTP taken from course files
+
+function nmPTP(arr, key, done) {
+  const threads = Math.sqrt(arr.length); //add so that i get the optimal number of threads for the input size
+  const pool = new StaticPool({
+    size: threads,
+    task: function(a) {
+        let m = 0;
+        for(let i = 0;  i < a.length; i++) {
+            if(a[i] == this.workerData) m++;
+        }
+        return m;
+    },
+    workerData: key
+  });
+
+  const size = arr.length/threads;
+
+  let res = 0, finished = 0;
+  for(let i = 0; i < threads; i++) {
+    (async () => {
+      let r = await pool.exec(arr.slice(i*size, (i+1)*size));
+      //console.log("Result: " + r);
+      res += r;
+      finished++;
+      if(finished == threads) {
+        done(res);
+        pool.destroy();
+      }
+    })();
+  }
 }
+
+function saveCount (res) { //function to return the count once all threads are finished, instead of using console.log
+  return res;
+}
+
+
 
 function syncCounter(array, key) {
     let count = 0;
@@ -27,4 +54,4 @@ function syncCounter(array, key) {
 
 
 //add so i can test functions
-module.exports = {asyncCounter, syncCounter};
+module.exports = {nmPTP, saveCount, syncCounter};
