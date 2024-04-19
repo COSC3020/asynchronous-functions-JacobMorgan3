@@ -16,7 +16,7 @@ let key = 0;
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
 key = 100;
 
-let a = code.asyncCounter(array,key);
+let a = code.nmPTP(array,key,done);
 let b = code.syncCounter(array,key);
 
 assert(outputEqual(a,b)); 
@@ -26,7 +26,7 @@ assert(outputEqual(a,b));
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
 key = 34;
 
-a = code.asyncCounter(array,key);
+a = code.nmPTP(array,key,done);
 b = code.syncCounter(array,key);
 
 assert(outputEqual(a,b)); 
@@ -36,7 +36,7 @@ assert(outputEqual(a,b));
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
 key = 4;
 
-a = code.asyncCounter(array,key);
+a = code.nmPTP(array,key,done);
 b = code.syncCounter(array,key);
 
 assert(outputEqual(a,b)); 
@@ -46,7 +46,7 @@ assert(outputEqual(a,b));
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7,78,78,78,78,78,78,78,78];
 key = 78;
 
-a = code.asyncCounter(array,key);
+a = code.nmPTP(array,key,done);
 b = code.syncCounter(array,key);
 
 assert(outputEqual(a,b)); 
