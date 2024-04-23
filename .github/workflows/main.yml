@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: npm install 'node-worker-threads-pool'
     - run: npm i jsverify
-    - run: node-worker-threads-pool
     - run: node code.test.js
