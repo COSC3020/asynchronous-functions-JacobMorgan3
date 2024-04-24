@@ -1,7 +1,8 @@
 const { StaticPool } = require("node-worker-threads-pool"); //nmPTP taken from course files
 
 function nmPTP(arr, key, done) {
-  const threads = Math.sqrt(arr.length); //add so that i get the optimal number of threads for the input size
+  const threads = Math.floor(Math.sqrt(arr.length)); //add so that i get the optimal number of threads for the input size and deal with any input size
+  //console.log("threads: " + threads)
   const pool = new StaticPool({
     size: threads,
     task: function(a) {
@@ -20,6 +21,7 @@ function nmPTP(arr, key, done) {
   for(let i = 0; i < threads; i++) {
     (async () => {
       let r = await pool.exec(arr.slice(i*size, (i+1)*size));
+      //console.log(arr.slice(i*size, (i+1)*size));
       //console.log("Result: " + r);
       res += r;
       finished++;
@@ -31,27 +33,24 @@ function nmPTP(arr, key, done) {
   }
 }
 
-function saveCount (res) { //function to return the count once all threads are finished, instead of using console.log
-  return res;
+function done(res) { //idea for a function that gets the result and then compares it with the sync result from Noah Mulvaney (I have not looked at his code, he verbally told me that he wrote a function that does this idea)
+  let syncCount = 0;
+  let array = [3,5,9,3,4,6,7,2,1,8,3,3,5,2,3,9,3,5,7,9,5,7,9,3,21,3,6,21,4,3,8,3];
+  let key = 3;
+  for (let i = 0; i < array.length; i ++) {
+      if (key == array[i])
+          syncCount++;
+  }
+  let equal = false;
+  if (res === syncCount) {
+    equal = true;
+    return equal;
+  }
+  else 
+    return false;
 }
 
 
-
-function syncCounter(array, key) {
-    let count = 0;
-    for (let i = 0; i < array.length; i ++) {
-        if (key == array[i])
-            count++;
-    }
-    return count;
-}
-
-
-//let array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
-//let key = 3;
-
-//console.log(asyncCounter(array, key));
-
-
+console.log(nmPTP([3,5,9,3,4,6,7,2,1,8,3,3,5,2,3,9,3,5,7,9,5,7,9,3,21,3,6,21,4,3,8,3], 3, done));
 //add so i can test functions
-module.exports = {nmPTP, saveCount, syncCounter};
+module.exports = {nmPTP, done, syncCounter};
