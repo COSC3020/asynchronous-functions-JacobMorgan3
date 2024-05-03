@@ -6,13 +6,12 @@ function nmPTP(arr, key, done) {
   const pool = new StaticPool({
     size: threads,
     task: function(a) {
-        let m = 0;
+        let sum = 0;
         for(let i = 0;  i < a.length; i++) {
-            if(a[i] == this.workerData) m++;
+            sum = sum + a[i];
         }
-        return m;
+        return sum;
     },
-    workerData: key
   });
 
   const size = arr.length/threads;
@@ -34,15 +33,13 @@ function nmPTP(arr, key, done) {
 }
 
 function done(res) { //idea for a function that gets the result and then compares it with the sync result from Noah Mulvaney (I have not looked at his code, he verbally told me that he wrote a function that does this idea)
-  let syncCount = 0;
+  let sum = 0;
   let array = [3,5,9,3,4,6,7,2,1,8,3,3,5,2,3,9,3,5,7,9,5,7,9,3,21,3,6,21,4,3,8,3];
-  let key = 3;
   for (let i = 0; i < array.length; i ++) {
-      if (key == array[i])
-          syncCount++;
+      sum = sum + array[i];
   }
   let equal = false;
-  if (res === syncCount) {
+  if (res === sum) {
     equal = true;
     return equal;
   }
@@ -51,6 +48,8 @@ function done(res) { //idea for a function that gets the result and then compare
 }
 
 
-console.log(nmPTP([3,5,9,3,4,6,7,2,1,8,3,3,5,2,3,9,3,5,7,9,5,7,9,3,21,3,6,21,4,3,8,3], 3, done));
+//console.log(nmPTP([3,5,9,3,4,6,7,2,1,8,3,3,5,2,3,9,3,5,7,9,5,7,9,3,21,3,6,21,4,3,8,3], 3, done));
+
+
 //add so i can test functions
 module.exports = {nmPTP, done, syncCounter};
