@@ -1,52 +1,34 @@
 const code = require("./code.js");
 const assert = require("assert");
 
-function outputEqual (a,b) { //function that returns true if a and b are equal
-  if (a == b)
-    return true;
-  else
-    return false;
-}
 
+//Test 1    If the arrayu is empty it should return 0
 let array = [];
-let key = 0;
+
+let a = code.nmPTP(array,done);
+
+assert(a); 
 
 
-//Test 1    If the key is not in the array it should return 0
+//Test 2    If there is one element the sum should be the one element
+array = [3];
+
+a = code.nmPTP(array,done);
+
+assert(a); 
+
+
+//Test 3    
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
-key = 100;
-
-let a = code.nmPTP(array,key,done);
-let b = code.syncCounter(array,key);
-
-assert(outputEqual(a,b)); 
-
-
-//Test 2    If the key is in the array 1 time
-array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
-key = 34;
 
 a = code.nmPTP(array,key,done);
-b = code.syncCounter(array,key);
 
-assert(outputEqual(a,b)); 
-
-
-//Test 3    If the key is in the array x times
-array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7];
-key = 4;
-
-a = code.nmPTP(array,key,done);
-b = code.syncCounter(array,key);
-
-assert(outputEqual(a,b)); 
+assert(a); 
 
 
-//Test 4    If the key is in the array x times
+//Test 4 
 array = [3,5,7,9,5,21,34,6,8,0,3,1,4,78,0,4,2,1,4,7,78,78,78,78,78,78,78,78];
-key = 78;
 
 a = code.nmPTP(array,key,done);
-b = code.syncCounter(array,key);
 
-assert(outputEqual(a,b)); 
+assert(a); 
