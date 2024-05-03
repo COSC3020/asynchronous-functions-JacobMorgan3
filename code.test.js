@@ -21,8 +21,9 @@ function done(res, arr) { //idea for a function that gets the result and then co
 //Test 1    If the arrayu is empty it should return 0
 let array = [];
 
+let a = code.nmPTP(array,done)
 
-assert(code.nmPTP(array,done), true); 
+assert(a, true); 
 
 
 //Test 2    If there is one element the sum should be the one element
