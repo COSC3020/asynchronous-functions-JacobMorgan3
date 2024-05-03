@@ -2,9 +2,9 @@ const { StaticPool } = require("node-worker-threads-pool"); //nmPTP taken from c
 
 function nmPTP(arr, done) {
   if (arr.length < 1)
-    const threads = 1;
+    threads = 1;
   else
-    const threads = Math.floor(Math.sqrt(arr.length)); //add so that i get the optimal number of threads for the input size and deal with any input size
+    threads = Math.floor(Math.sqrt(arr.length)); //add so that i get the optimal number of threads for the input size and deal with any input size
   const pool = new StaticPool({
     size: threads,
     task: function(a) {
