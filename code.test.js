@@ -2,6 +2,22 @@ const code = require("./code.js");
 const assert = require("assert");
 
 
+function done(res, arr) { //idea for a function that gets the result and then compares it with the sync result from Noah Mulvaney (I have not looked at his code, he verbally told me that he wrote a function that does this idea)
+  let sum = 0;
+  for (let i = 0; i < arr.length; i ++) {
+      sum = sum + arr[i];
+  }
+  let equal = false;
+  if (res === sum) {
+    equal = true;
+    return equal;
+  }
+  else 
+    return false;
+}
+
+
+
 //Test 1    If the arrayu is empty it should return 0
 let array = [];
 
