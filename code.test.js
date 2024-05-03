@@ -22,7 +22,7 @@ function done(res, arr) { //idea for a function that gets the result and then co
 let array = [];
 
 
-assert(code.nmPTP(array,done)); 
+assert(code.nmPTP(array,done), true); 
 
 
 //Test 2    If there is one element the sum should be the one element
